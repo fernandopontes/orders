@@ -36,3 +36,10 @@ def deletar_pedido(pedido_id):
 def listar_produtos():
     produtos = Produto.query.all()
     return jsonify([{'id': p.id, 'nome': p.nome, 'preco': p.preco} for p in produtos])
+
+@routes.route('/produtos/<int:produto_id>', methods=['DELETE'])
+def deletar_produto(produto_id):
+    produto = Produto.query.get_or_404(produto_id)
+    db.session.delete(produto)
+    db.session.commit()
+    return jsonify({'message': 'Produto deletado com sucesso!'}), 200
