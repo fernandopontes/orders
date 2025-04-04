@@ -25,7 +25,7 @@ def listar_pedidos():
     pedidos = Pedido.query.all()
     return jsonify([{'id': p.id, 'produto': p.produto.nome, 'quantidade': p.quantidade} for p in pedidos])
 
-@routes.route('pedidos/<int:pedido_id>', methods=['DELETE'])
+@routes.route('/pedidos/<int:pedido_id>', methods=['DELETE'])
 def deletar_pedido(pedido_id):
     pedido = Pedido.query.get_or_404(pedido_id)
     db.session.delete(pedido)
